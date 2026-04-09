@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 
-
-const font = Open_Sans({subsets:['latin'],variable:'--font-open-sans'});
-
+const font = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" });
 
 export const metadata: Metadata = {
   title: "Team Chat App",
@@ -18,11 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("h-full", "antialiased", font.variable)}
-    >
-      <body className="min-h-full flex flex-col {font.className}">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={cn("h-full", "antialiased", font.variable)}>
+        <body className="min-h-full flex flex-col {font.className}">
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
