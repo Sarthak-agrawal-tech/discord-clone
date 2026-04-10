@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Open_Sans } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
-
-const font = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" });
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Team Chat App",
@@ -18,9 +16,20 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={cn("h-full", "antialiased", font.variable)}>
-        <body className="min-h-full flex flex-col {font.className}">
-          {children}
+      <html
+        lang="en"
+        suppressHydrationWarning={true}
+        className="h-full antialiased"
+      >
+        <body className={cn("bg-white dark:bg-[#313338]")}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            storageKey="discord-theme"
+          >
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
