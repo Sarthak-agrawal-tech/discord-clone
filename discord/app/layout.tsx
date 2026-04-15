@@ -21,7 +21,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className="h-full antialiased"
       >
-        <body className={cn("bg-white dark:bg-[#313338]")}>
+        <body className={cn("h-full min-h-screen bg-white dark:bg-[#313338]")}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"

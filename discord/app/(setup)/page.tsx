@@ -21,7 +21,11 @@ const SetupPage = async ()=>{
         return redirect(`/servers/${server.id}`);
     }
 
-    return <InitialModel/>
+    return (
+        <div className="flex min-h-screen items-center justify-center">
+            <InitialModel />
+        </div>
+    );
 }
 
 export default SetupPage;
