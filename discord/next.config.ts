@@ -5,8 +5,15 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   images:{
-    domains:[
-      "uploadthing.com"
+    remotePatterns:[
+      {
+        protocol: "https",
+        hostname: "uploadthing.com"
+      },
+      {
+        protocol: "https",
+        hostname: "utfs.io"
+      }
     ]
   }
 };

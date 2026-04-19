@@ -23,7 +23,7 @@ const SetupPage = async ()=>{
 
     return (
         <div className="flex min-h-screen items-center justify-center">
-            <InitialModel />
+            <InitialModel/>
         </div>
     );
 }
