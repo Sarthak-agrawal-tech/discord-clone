@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { X } from "lucide-react";
 
 import { UploadDropzone } from "@uploadthing/react";
 import type { OurFileRouter } from "@/app/api/uploadthing/core";
@@ -25,6 +26,12 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
                     alt="Upload"
                     className="rounded-full"
                 />
+                <button onClick={() => onChange("")} 
+                    className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+                  >
+                  <X
+                  className="h-4 w-4"/>
+                </button>
             </div>
         )
     }
