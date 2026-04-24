@@ -21,13 +21,13 @@ export const NavigationSidebar = async ()=>{
         }
     })
     return(
-        <div className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3">
+        <div className="space-y-4 flex h-full w-full flex-col items-center border-r border-zinc-200 bg-white py-3 text-zinc-700 dark:border-zinc-800 dark:bg-[#1E1F22] dark:text-zinc-200">
             <NavigationAction/>
             <Separator className="h-[2px] bg-zinc-300 w-10 dark:bg-zinc-700 rounded-md mx-auto"/>
 
             <ScrollArea className="flex-1 w-full mb-4">
                 {servers.map((server)=>(
-                    <div key={server.id}>
+                    <div key={server.id} className="mb-4">
                         <Navigationitem
                             id={server.id}
                             imageUrl={server.imageUrl}
