@@ -1,19 +1,44 @@
-import React from "react";
-import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
-import { cn } from "@/lib/utils";
-const Mainlayout = async ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="h-full">
-      <div className={cn("max-md:hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0 left-0")}>
-        <NavigationSidebar/>
-      </div>
-      <main className="md:pl-[72px] h-full">
+import ServerSidebar from "@/components/server/server-sidebar";
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
 
-      {children}
-      </main>
+import { redirect } from "next/dist/client/components/navigation";
 
+const ServerIdLayout = async ({ children, params }: 
+    { children: React.ReactNode;
+    params: Promise<{serverId: string}>; 
+ }) => {
+  const { serverId } = await params;
+  const profile = await currentProfile(); 
+
+  if(!profile) {
+    return redirect("/")
+  }
+
+  const server = await db.server.findFirst({
+    where:{
+        id: serverId,
+        members:{
+            some:{
+                profileId: profile.id
+            }
+        }
+    }
+  })
+
+  if(!server){
+    return redirect("/");
+  }
+
+  return <div className="h-full">
+    <div className="max-md:hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
+        <ServerSidebar serverId={(await params).serverId}/>
     </div>
-  );
+    <main className="h-full md:pl-60">
+    {children}
+
+    </main>
+  </div>;
 };
 
-export default Mainlayout;
+export default ServerIdLayout;
