@@ -6,6 +6,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger,DropdownMenuItem
 import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
 import useModal from "@/hooks/use-modal-store";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 interface ServerHeaderProps{
     server: ServerWithMembersWithProfiles
@@ -34,11 +36,10 @@ const ServerHeader = ({
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="focus:outline-none"> 
-                <button className="w-full text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition">
+            <DropdownMenuTrigger className={cn(buttonVariants({variant:"ghost"}),
+            "focus:outline-none w-full text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition")}> 
                     {server.name}
                     <ChevronDown className="h-5 w-5 ml-auto"/>
-                </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:neutral-400 space-y-[2px]">
                 {isModerator && (
