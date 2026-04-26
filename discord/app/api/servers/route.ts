@@ -24,10 +24,12 @@ export async function POST(req: Request) {
           create: [{ name: "general", profileId: profile.id }],
         },
         members: {
-            create: [{ profileId: profile.id, role: MemberRole.ADMIN }],
-      },
-    }
-  });
+          createMany: {
+            data: [{ profileId: profile.id, role: MemberRole.ADMIN }],
+          }
+        }
+      }
+    });
 
     return NextResponse.json(server);
  } catch (error) {
