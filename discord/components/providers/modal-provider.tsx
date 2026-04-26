@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useSyncExternalStore } from "react";
 import { CreateServerModal } from "../modals/create-server-models";
+import { InviteModal } from "../modals/invite-model";
 // const CreateServerModal = dynamic(
 //   () =>
 //     import("../modals/create-server-models").then(
@@ -29,6 +30,7 @@ export const ModalProvider = () => {
   return (
     <>
       <CreateServerModal />
+      <InviteModal/>
     </>
   );
 };
