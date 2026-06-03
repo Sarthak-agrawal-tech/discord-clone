@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeProvider } from "@teispace/next-themes";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { cn } from "@/lib/utils";
 
