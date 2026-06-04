@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import { CreateServerModal } from "../modals/create-server-models";
 import { InviteModal } from "../modals/invite-model";
 import { EditServerModal } from "../modals/edit-server-model";
+import { MembersModal } from "../modals/members-model";
 
 
 const emptySubscribe = () => () => {};
@@ -24,6 +25,7 @@ export const ModalProvider = () => {
       <CreateServerModal />
       <InviteModal/>
       <EditServerModal/>
+      <MembersModal/>
     </>
   );
 };
