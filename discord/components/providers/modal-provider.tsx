@@ -7,6 +7,7 @@ import { EditServerModal } from "../modals/edit-server-model";
 import { MembersModal } from "../modals/members-model";
 import { CreateChannelModal } from "../modals/create-channel-models";
 import { LeaveServerModal } from "../modals/leave-server-model";
+import { DeleteServerModal } from "../modals/delete-server-model";
 
 const emptySubscribe = () => () => {};
 
@@ -29,6 +30,7 @@ export const ModalProvider = () => {
       <MembersModal/>
       <CreateChannelModal/>
       <LeaveServerModal/>
+      <DeleteServerModal/>
     </>
   );
 };
