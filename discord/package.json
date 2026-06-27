@@ -10,7 +10,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "ts-node --transpile-only --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\" server.ts",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
