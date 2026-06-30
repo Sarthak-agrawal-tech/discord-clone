@@ -69,7 +69,9 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
                 </span>+ K
             </kbd>
         </button>
-        <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandDialog 
+        className="border-none border-0"
+        open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Search all channels and members"/>
             <CommandList>
                 <CommandEmpty>
