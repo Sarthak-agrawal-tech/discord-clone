@@ -41,7 +41,7 @@ const ServerHeader = ({
                     {server.name}
                     <ChevronDown className="h-5 w-5 ml-auto"/>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:neutral-400 space-y-[2px]">
+            <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-zinc-400 space-y-[2px]">
                 {isModerator && (
                     <DropdownMenuItem 
                     onClick={()=> onOpen("invite", {server})}
