@@ -11,6 +11,7 @@ import { DeleteServerModal } from "../modals/delete-server-model";
 import { DeleteChannelModal } from "../modals/delete-channel-model";
 import { EditChannelModal } from "../modals/edit-channel-models";
 import { MessageFileModal } from "../modals/message-file-modal";
+import { DeleteMessageModal } from "../modals/delete-message-modal";
 const emptySubscribe = () => () => {};
 
 export const ModalProvider = () => {
@@ -36,6 +37,7 @@ export const ModalProvider = () => {
       <DeleteChannelModal/>
       <EditChannelModal/>
       <MessageFileModal/>
+      <DeleteMessageModal/>
     </>
   );
 };
