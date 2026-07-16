@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSocket } from "@/components/providers/socket-provider";
 
 interface ChatQueryProps{
-    queryKey: string;
+    queryKey: string[];
     apiUrl: string;
     paramKey: "channelId" | "conversationId";
     paramValue: string

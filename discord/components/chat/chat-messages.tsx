@@ -41,7 +41,7 @@ export const ChatMessages = ({
     paramValue,
     type,
 }: ChatMessagesProps) =>{
-    const queryKey = `chat:${chatId}`;
+    const queryKey = ["chat", chatId];
     const addKey = `chat:${chatId}:messages`;
     const updateKey =  `chat:${chatId}:messages:update`;
 

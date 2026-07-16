@@ -6,7 +6,7 @@ import { useEffect } from "react";
 type ChatSocketProps = {
     addKey: string;
     updateKey: string;
-    queryKey: string;
+    queryKey: string[];
 }
 
 type MessageWithMemberWithProfile = Message & {
@@ -64,6 +64,8 @@ export const useChatSocket = ({
         socket.on(addKey, (message: MessageWithMemberWithProfile) => {
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 // FIX: If there are no existing messages fetched yet, initialize the cache structure safely
+
+                
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return {
                         pageParams: [undefined],
