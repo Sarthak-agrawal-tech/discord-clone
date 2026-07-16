@@ -44,6 +44,7 @@ export const ChatMessages = ({
     const queryKey = ["chat", chatId];
     const addKey = `chat:${chatId}:messages`;
     const updateKey =  `chat:${chatId}:messages:update`;
+    const deleteKey = `chat:${chatId}:messages:delete`;
 
     const chatRef = useRef<ComponentRef<"div">>(null);
     const bottomRef = useRef<ComponentRef<"div">>(null);
@@ -62,7 +63,7 @@ export const ChatMessages = ({
         paramKey,
         paramValue,
     })
-    useChatSocket({queryKey, addKey, updateKey
+    useChatSocket({queryKey, addKey, updateKey, deleteKey
     })
     useChatScroll({
         chatRef,

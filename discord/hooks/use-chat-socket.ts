@@ -6,6 +6,7 @@ import { useEffect } from "react";
 type ChatSocketProps = {
     addKey: string;
     updateKey: string;
+    deleteKey: string;
     queryKey: string[];
 }
 
@@ -18,6 +19,7 @@ type MessageWithMemberWithProfile = Message & {
 export const useChatSocket = ({
     addKey,
     updateKey,
+    deleteKey,
     queryKey,
 }: ChatSocketProps) => {
     const { socket } = useSocket();
@@ -93,6 +95,30 @@ export const useChatSocket = ({
                 };
             });
         });
+
+        //Handle delete in real time
+         socket.on(deleteKey, (message: MessageWithMemberWithProfile) => {
+            queryClient.setQueryData(queryKey, (oldData: any) => {
+                if (!oldData || !oldData.pages || oldData.pages.length === 0) {
+                    return oldData;
+                }
+
+                const newData = oldData.pages.map((page: any) => {
+                    return {
+                        ...page,
+                        // Filter out the deleted message dynamically by its ID
+                        items: (page.items || []).filter((item: any) => item.id !== message.id)
+                    };
+                });
+
+                return {
+                    ...oldData,
+                    pages: newData,
+                };
+            });
+        });
+
+
 
         // Cleanup listeners to prevent severe memory leaks when channel changes
         return () => {
