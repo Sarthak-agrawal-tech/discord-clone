@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@import "../node_modules/@livekit/components-styles/dist/general/index.css";
+
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 html,
@@ -200,3 +203,4 @@ body {
   color: hsl(var(--foreground));
   font-family: Arial, Helvetica, sans-serif;
 }
+
