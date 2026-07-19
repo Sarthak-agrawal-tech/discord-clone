@@ -23,6 +23,10 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
+import { MemberRole } from "@/lib/generated/prisma/enums";
+import qs from "query-string"
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 const roleIconMap={
@@ -34,7 +38,7 @@ const roleIconMap={
 export const MembersModal = () => {
   const {onOpen, isOpen, onClose, type, data,} = useModal();
   const [loadingId, setLoadingId] = useState("");
-
+  const router = useRouter();
   
 
   const isModalOpen = isOpen && type === "members";
@@ -44,12 +48,55 @@ export const MembersModal = () => {
     return null;
   }
 
+  const onKick = async (memberId: string) =>{
+    try{
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id
+        }
+      });
+
+      const response = await axios.delete(url);
+
+      router.refresh();
+      onOpen("members", {server: response.data})
+    }catch(error){
+      console.log(error);
+    }finally{
+      setLoadingId("");
+    }
+  }
+
+
+  const onRoleChange = async (memberId: string, role: MemberRole) =>{
+    try{
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query:{
+          serverId: server?.id,
+        }
+      });
+
+
+      const response = await axios.patch(url,{role});
+
+      router.refresh();
+      onOpen("members", {server: response.data});
+    } catch (error){
+      console.log(error);
+    } finally{
+      setLoadingId("");
+    }
+  }
 
 
 
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={onClose} modal={false}>
       <DialogContent className="bg-white text-black">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
@@ -76,26 +123,31 @@ export const MembersModal = () => {
                 </div>
                 {server.profileId !== member.profileId && loadingId !== member.id && (
                   <div className="ml-auto">
-                    <DropdownMenu modal={false}>
+                    <DropdownMenu>
                       <DropdownMenuTrigger>
                         <MoreVertical className="h-4 w-4 text-zinc-500"/>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent side="left">
                         <DropdownMenuSub>
-                          <DropdownMenuSubTrigger className="flex items-center cursor-pointer select-none outline-none">
-                            <ShieldQuestion className="w-4 h-4 mr-2 pointer-events-none"/>
-                            <span className="pointer-events-none">Role</span>
+                          <DropdownMenuSubTrigger className="flex items-center">
+                            <ShieldQuestion className="w-4 h-4 mr-2"/>
+                            <span>Role</span>
                           </DropdownMenuSubTrigger>
                           <DropdownMenuPortal>
                             <DropdownMenuSubContent>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem 
+                                className="cursor-pointer"
+                                onClick={() => onRoleChange(member.id, "GUEST")}
+                              >
                                 <Shield className="w-4 h-4 mr-2"/>
                                 Guest
                                 {member.role === "GUEST" && (
                                   <Check className="w-4 h-4 ml-auto"/>
                                 )}
                               </DropdownMenuItem>
-                               <DropdownMenuItem>
+                               <DropdownMenuItem 
+                                onClick={() => onRoleChange(member.id, "MODERATOR")}
+                               >
                                 <ShieldCheck className="w-4 h-4 mr-2"/>
                                 Moderator
                                 {member.role === "MODERATOR" && (
@@ -106,7 +158,9 @@ export const MembersModal = () => {
                             </DropdownMenuPortal>
                         </DropdownMenuSub>
                         <DropdownMenuSeparator/>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem
+                          onClick={() => onKick(member.id)}
+                          >
                             <Gavel className="h-4 w-4 mr-2"/>
                             Kick
                           </DropdownMenuItem>
