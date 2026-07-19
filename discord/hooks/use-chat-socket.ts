@@ -98,7 +98,7 @@ export const useChatSocket = ({
 
         //Handle delete in real time
          socket.on(deleteKey, (message: MessageWithMemberWithProfile) => {
-            queryClient.setQueryData(queryKey, (oldData: any) => {
+            queryClient.setQueryData([queryKey], (oldData: any) => {
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return oldData;
                 }
