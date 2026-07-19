@@ -30,7 +30,7 @@ export async function GET(
                 inviteCode: true,
                 // Add only other specific fields your UI renders
             }
-        });
+        });//
 
         if (!server) {
             return new NextResponse("Server Not Found", { status: 404 });
