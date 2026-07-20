@@ -185,16 +185,18 @@ erDiagram
     DirectMessage }|--|| Member : author
     DirectMessage }|--|| Conversation : conversation
 
-    enum MemberRole {
-        ADMIN
-        MODERATOR
-        GUEST
+    MemberRole {
+        <<enumeration>>
+        ADMIN ADMIN
+        MODERATOR MODERATOR
+        GUEST GUEST
     }
     
-    enum ChannelType {
-        TEXT
-        AUDIO
-        VIDEO
+    ChannelType {
+        <<enumeration>>
+        TEXT TEXT
+        AUDIO AUDIO
+        VIDEO VIDEO
     }
 ```
 
