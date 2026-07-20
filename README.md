@@ -416,7 +416,7 @@ graph TD
     D -->|messageFile| N[MessageFileModal]
     D -->|deleteMessage| O[DeleteMessageModal]
     
-    AnyComponent -->|useModal().onOpen| C
+    AnyComponent -->|"useModal().onOpen"| C
 ```
 
 **Usage:**
