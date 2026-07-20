@@ -186,14 +186,14 @@ erDiagram
     DirectMessage }|--|| Conversation : conversation
 
     MemberRole {
-        <<enumeration>>
+        string TYPE_ENUM
         ADMIN ADMIN
         MODERATOR MODERATOR
         GUEST GUEST
     }
     
     ChannelType {
-        <<enumeration>>
+        string TYPE_ENUM
         TEXT TEXT
         AUDIO AUDIO
         VIDEO VIDEO
