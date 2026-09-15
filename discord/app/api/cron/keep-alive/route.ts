@@ -3,10 +3,14 @@ import { db } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-async function keepAlive() {
+async function pingDB() {
   await db.profile.findFirst({
     select: { id: true },
   });
+}
+
+export async function GET() {
+  await pingDB();
 
   return NextResponse.json({
     success: true,
@@ -14,14 +18,7 @@ async function keepAlive() {
   });
 }
 
-export async function GET() {
-  return keepAlive();
-}
-
 export async function HEAD() {
-  await db.profile.findFirst({
-    select: { id: true },
-  });
-
+  await pingDB();
   return new NextResponse(null, { status: 200 });
 }
