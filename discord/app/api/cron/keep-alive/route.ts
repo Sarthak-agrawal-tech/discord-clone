@@ -1,11 +1,5 @@
 export const dynamic = 'force-dynamic';
 import { NextResponse,NextRequest } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-// Match your exact environment variable names from Supabase
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY!;
-
 import { db } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
