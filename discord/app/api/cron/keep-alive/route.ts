@@ -1,15 +1,7 @@
-export const dynamic = 'force-dynamic';
-import { NextResponse,NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(req: NextRequest) {
-  const auth = req.headers.get("authorization");
-
-  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  // Real database query to keep Supabase active
+export async function GET() {
   await db.profile.findFirst({
     select: { id: true },
   });
